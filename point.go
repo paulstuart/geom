@@ -22,7 +22,7 @@ func (p Point) Bounds() *Bounds {
 
 // Within calculates whether p is within poly.
 func (p Point) Within(poly Polygonal) WithinStatus {
-	return pointInPolygonal(p, poly)
+	return PointInPolygonal(p, poly)
 }
 
 // Equals returns whether p is equal to p2.

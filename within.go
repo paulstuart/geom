@@ -8,12 +8,12 @@ type Withiner interface {
 	Within(Polygonal) WithinStatus
 }
 
-// pointInPolygonal determines whether "pt" is
+// PointInPolygonal determines whether "pt" is
 // within any of the polygons in "pg".
 // adapted from https://rosettacode.org/wiki/Ray-casting_algorithm#Go.
 // In this version of the algorithm, points that lie on the edge of the polygon
 // are considered inside.
-func pointInPolygonal(pt Point, pg Polygonal) (in WithinStatus) {
+func PointInPolygonal(pt Point, pg Polygonal) (in WithinStatus) {
 	for _, poly := range pg.Polygons() {
 		pgBounds := poly.ringBounds()
 		tempIn := pointInPolygon(pt, poly, pgBounds)

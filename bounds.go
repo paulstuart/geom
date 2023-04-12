@@ -78,8 +78,8 @@ func (b *Bounds) Within(poly Polygonal) WithinStatus {
 		}
 		return Outside
 	}
-	minIn := pointInPolygonal(b.Min, poly)
-	maxIn := pointInPolygonal(b.Max, poly)
+	minIn := PointInPolygonal(b.Min, poly)
+	maxIn := PointInPolygonal(b.Max, poly)
 	if minIn == Outside || maxIn == Outside {
 		return Outside
 	}

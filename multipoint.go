@@ -16,7 +16,7 @@ func (mp MultiPoint) Bounds() *Bounds {
 // its edge.
 func (mp MultiPoint) Within(poly Polygonal) WithinStatus {
 	for _, p := range mp {
-		if pointInPolygonal(p, poly) == Outside {
+		if PointInPolygonal(p, poly) == Outside {
 			return Outside
 		}
 	}

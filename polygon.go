@@ -117,7 +117,7 @@ func (p Polygon) Within(poly Polygonal) WithinStatus {
 	}
 	for _, r := range p {
 		for _, pt := range r {
-			if pointInPolygonal(pt, poly) == Outside {
+			if PointInPolygonal(pt, poly) == Outside {
 				return Outside
 			}
 		}
