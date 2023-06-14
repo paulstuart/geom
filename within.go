@@ -1,6 +1,9 @@
 package geom
 
-import "math"
+import (
+	"log"
+	"math"
+)
 
 // Withiner is an interface for types that can be determined to be
 // within a polygon or not.
@@ -74,6 +77,39 @@ func pointInPolygon(pt Point, pg Polygon, pgBounds []*Bounds) (in WithinStatus) 
 			if rayIntersectsSegment(pt, ring[i-1], ring[i]) {
 				in = in.invert()
 			}
+		}
+	}
+	return in
+}
+
+// pointInPath determines whether "pt" is
+// within "pg".
+// adapted from pointInPolygon
+func pointInPath(pt Point, ring Path) (in WithinStatus) {
+	if len(ring) < 3 {
+		log.Printf("RING TOO SMALL: %v", ring)
+		return
+	}
+	// check it's a proper ring
+	if !ring[len(ring)-1].Equals(ring[0]) {
+		log.Printf("RING INCOMPLETE: %v != %v", ring[0], ring[len(ring)-1])
+		return
+	}
+
+	if pointOnSegment(pt, ring[len(ring)-1], ring[0]) {
+		log.Printf("RING ON EDGE: %v != %v", ring[0], ring[len(ring)-1])
+		return OnEdge
+	}
+	if rayIntersectsSegment(pt, ring[len(ring)-1], ring[0]) {
+		in = in.invert()
+	}
+	// check the rest of the segments.
+	for i := 1; i < len(ring); i++ {
+		if pointOnSegment(pt, ring[i-1], ring[i]) {
+			return OnEdge
+		}
+		if rayIntersectsSegment(pt, ring[i-1], ring[i]) {
+			in = in.invert()
 		}
 	}
 	return in

@@ -103,3 +103,28 @@ func TestWithin4(t *testing.T) {
 		t.Errorf("%v should be within %v", p, poly)
 	}
 }
+
+func TestPointInPath(t *testing.T) {
+	p1 := Point{620858.7034230313, -1.3334340701764394e+06}
+	p2 := Point{620858.7034230313, +10.3334340701764394e+06}
+	b := Path{
+		// []Point{
+		{-2.758081092115788e+06, -2.1035219712004187e+06},
+		{-2.7580810921157864e+06, 1.9603377468041454e+06},
+		{2.6080741578387334e+06, 1.954523927465083e+06},
+		{2.60226033849967e+06, -2.10352197120042e+06},
+		{-2.758081092115788e+06, -2.1035219712004187e+06},
+		// },
+	}
+	p3 := b[2]
+
+	if pointInPath(p1, b) != Inside {
+		t.Errorf("Point %v should be within polygon %v", p1, b)
+	}
+	if pointInPath(p2, b) == Inside {
+		t.Errorf("Point %v should not be within polygon %v", p1, b)
+	}
+	if pointInPath(p3, b) != OnEdge {
+		t.Errorf("Point %v should be within polygon %v", p3, b)
+	}
+}

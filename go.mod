@@ -11,3 +11,17 @@ require (
 )
 
 go 1.13
+
+replace github.com/ctessum/geom => ./
+
+replace github.com/ctessum/geom/op => ./op
+
+replace github.com/ctessum/geom/proj => ./proj
+
+replace github.com/ctessum/geom/encoding/geojson => ./encoding/geojson
+
+replace github.com/ctessum/geom/encoding/hex => ./encoding/hex
+
+replace github.com/ctessum/geom/encoding/wkb => ./encoding/wkb
+
+replace github.com/ctessum/geom/index/rtree => ./index/rtree
